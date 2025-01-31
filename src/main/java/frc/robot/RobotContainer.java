@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.swervedrive.PID_ExtensionCMD;
+import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
@@ -87,6 +89,9 @@ public class RobotContainer
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
+  ARM_SS mArm_SS;
+  PID_ExtensionCMD mPID_ExtensionCMD;
+
   public RobotContainer()
   {
     // Configure the trigger bindings
@@ -104,7 +109,10 @@ public class RobotContainer
    */
   private void configureBindings()
   {
+    mArm_SS = new ARM_SS();
+    mPID_ExtensionCMD = new PID_ExtensionCMD(mArm_SS);
 
+    
     Command driveFieldOrientedDirectAngle      = drivebase.driveFieldOriented(driveDirectAngle);
     Command driveFieldOrientedAnglularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
     Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveRobotOriented);
