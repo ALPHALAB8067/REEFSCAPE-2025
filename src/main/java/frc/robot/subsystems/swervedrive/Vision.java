@@ -104,7 +104,7 @@ public class Vision
   /**
    * Calculates a target pose relative to an AprilTag on the field.
    *
-   * @param aprilTag    The ID of the AprilTag.
+   * @param aprilTag    The ID of the ”Tag.
    * @param robotOffset The offset {@link Transform2d} of the robot to apply to the pose for the robot to position
    *                    itself correctly.
    * @return The target pose of the AprilTag.
@@ -348,21 +348,15 @@ public class Vision
      * Right Camera
      */
     RIGHT_CAM("right",
-              new Rotation3d(0, Math.toRadians(-24.094), Math.toRadians(-30)),
+              new Rotation3d(0, Math.toRadians(4.34), Math.toRadians(28.5)),
               new Translation3d(Units.inchesToMeters(12.056),
                                 Units.inchesToMeters(-10.981),
                                 Units.inchesToMeters(8.44)),
-              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
+              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
     /**
      * Center Camera
      */
-    CENTER_CAM("center",
-               new Rotation3d(0, Units.degreesToRadians(18), 0),
-               new Translation3d(Units.inchesToMeters(-4.628),
-                                 Units.inchesToMeters(-10.687),
-                                 Units.inchesToMeters(16.129)),
-               VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
-
+               
     /**
      * Latency alert to use when high latency is detected.
      */
