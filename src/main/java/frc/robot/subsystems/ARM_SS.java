@@ -90,13 +90,14 @@ public class ARM_SS extends SubsystemBase {
   public void ExtensionGoToPosition(){
     mExtensionPIDController.setReference( SmartDashboard.getNumber("extensionSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
-  public void RotationGoToPosition(){
-
-    
+  public void RotationGoToPosition(){    
     mRotationPIDController.setReference(SmartDashboard.getNumber("rotationSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
   public void stopExtension(){
     mLeadExtension.set(0);
+  }
+  public void stopRotation(){
+    mLeadBase.set(0);
   }
   @Override
   public void periodic() {

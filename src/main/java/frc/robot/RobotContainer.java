@@ -26,6 +26,7 @@ public class RobotContainer {
 
   private final ARM_SS mArm_SS = new ARM_SS();
   private final PID_ExtensionCMD mPID_ExtensionCMD = new PID_ExtensionCMD(mArm_SS);
+  private final PID_RotationCMD mPID_RotationCMD = new PID_RotationCMD(mArm_SS);
   final         CommandXboxController driverXbox = new CommandXboxController(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -45,6 +46,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driverXbox.b().whileTrue(mPID_ExtensionCMD);
+    driverXbox.a().whileTrue(mPID_RotationCMD);
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
