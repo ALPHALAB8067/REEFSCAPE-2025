@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ARM_SS;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class PID_ExtensionCMD extends Command {
+public class PID_RotationCMD extends Command {
   /** Creates a new PID_Arm. */
   private final ARM_SS mArm_SS;
   public PID_RotationCMD(ARM_SS pArmSS) {
