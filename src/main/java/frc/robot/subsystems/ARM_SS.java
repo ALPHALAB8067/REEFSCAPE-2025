@@ -29,16 +29,17 @@ public class ARM_SS extends SubsystemBase {
   private final SparkMax mLeadBase;
   private final SparkMax mFollowBase;
   private final SparkMax mLeadExtension;
+ // private final SparkMax mWrist;
   private final RelativeEncoder mExtensionEncoder;
   private final SparkAbsoluteEncoder mArmEncoder;
+ // private final SparkAbsoluteEncoder mWristEncoder;
   private final SparkClosedLoopController mExtensionPIDController;
   private final SparkClosedLoopController mRotationPIDController;
+  //private final SparkClosedLoopController mWristPIDController;
   private final SparkMaxConfig mLeadConfig;
   private final SparkMaxConfig mFollowConfig;
   private final SparkMaxConfig mExtensionConfig;
-  private double wanted;
-
-
+ // private final SparkMaxConfig mWristConfig;
 
   /** Creates a new ARM_SS. */
   public ARM_SS() {
@@ -52,9 +53,9 @@ public class ARM_SS extends SubsystemBase {
       .velocityConversionFactor(Constants.ArmConstants.RotationdegresParTour);
       mLeadConfig.closedLoop
       .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
-      .p(0.003)//p = 0.003
-      .i(0)//i = 0.000001
-      .d(0);//d = 0.0001
+      .p(0.003,ClosedLoopSlot.kSlot0)//p = 0.003
+      .i(0,ClosedLoopSlot.kSlot0)//i = 0.000001
+      .d(0,ClosedLoopSlot.kSlot0);//d = 0.0001
     mLeadBase.configure(mLeadConfig,ResetMode.kNoResetSafeParameters,PersistMode.kNoPersistParameters);
 
     mFollowBase = new SparkMax(17,MotorType.kBrushless);
@@ -84,26 +85,58 @@ public class ARM_SS extends SubsystemBase {
 
     SmartDashboard.putNumber("extensionSetpoint", 0);
     SmartDashboard.putNumber("rotationSetpoint", 0);
-    }
+    /*SmartDashboard.putNumber("WristSetpoint", 0);*/
+  }
+
   public void ExtensionGoToPosition(){
     mExtensionPIDController.setReference( SmartDashboard.getNumber("extensionSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
+
   public void RotationGoToPosition(){    
     mRotationPIDController.setReference(SmartDashboard.getNumber("rotationSetpoint", 0) + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
+
+  /*public void WristGoToPosition(){
+    mExtensionPIDController.setReference(SmartDashboard.getNumber("WristSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
+  }
+  */
+  public void AllInOne(double pLongueur, double pAngleBase/*, pAngleWrist */){
+    RotationGoToPosition();
+    ExtensionGoToPosition();
+    /*  mExtensionPIDController.setReference(pLongueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+     mRotationPIDController.setReference( pAngleBase + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+    */
+     /*mWristPIDController.setReference(pAngleWrist, ControlType.kPosition,ClosedLoopSlot.kSlot0);*/
+  }
+
+  public void ManualExtension(double pSpeed){
+    mLeadExtension.set(pSpeed);
+  }
+  
+  public void ManualRotation(double pSpeed){
+    mLeadBase.set(pSpeed);
+  }
+
+  /*public void ManualWrist(double pSpeed){
+    mWrist.set(pSpeed);
+  }*/
+
   public void stopExtension(){
     mLeadExtension.set(0);
   }
+
   public void stopRotation(){
     mLeadBase.set(0);
   }
+
+  /*public void stopWrist(){
+    mWrist.set(0);
+  }*/
   @Override
   public void periodic() {
-
     SmartDashboard.putNumber("actual Extension position", mExtensionEncoder.getPosition());
     SmartDashboard.putNumber("actual rotation position", mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone);
-
+    //SmartDashboard.putNumber("actual Wrist Position", mWristEncoder.getPosition());
     SmartDashboard.putNumber("output", mLeadExtension.getAppliedOutput());
-    // This method will be called once per scheduler run
   }
 }
