@@ -42,8 +42,6 @@ public class ARM_SS extends SubsystemBase {
 
   /** Creates a new ARM_SS. */
   public ARM_SS() {
-    SmartDashboard.putNumber("x", wanted);
-
     mLeadBase = new SparkMax(12,MotorType.kBrushless);
     mLeadConfig = new SparkMaxConfig();
       mLeadConfig
@@ -54,9 +52,9 @@ public class ARM_SS extends SubsystemBase {
       .velocityConversionFactor(Constants.ArmConstants.RotationdegresParTour);
       mLeadConfig.closedLoop
       .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
-      .p(0.003000000026077032)//p = 0.003
-      .i( 9.999999974752427e-7)//i = 0.000001
-      .d(0.00009999999747378752);//d = 0.0001
+      .p(0.003)//p = 0.003
+      .i(0)//i = 0.000001
+      .d(0);//d = 0.0001
     mLeadBase.configure(mLeadConfig,ResetMode.kNoResetSafeParameters,PersistMode.kNoPersistParameters);
 
     mFollowBase = new SparkMax(17,MotorType.kBrushless);
@@ -91,7 +89,7 @@ public class ARM_SS extends SubsystemBase {
     mExtensionPIDController.setReference( SmartDashboard.getNumber("extensionSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
   public void RotationGoToPosition(){    
-    mRotationPIDController.setReference(SmartDashboard.getNumber("rotationSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
+    mRotationPIDController.setReference(SmartDashboard.getNumber("rotationSetpoint", 0) + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
   public void stopExtension(){
     mLeadExtension.set(0);
@@ -102,7 +100,9 @@ public class ARM_SS extends SubsystemBase {
   @Override
   public void periodic() {
 
-    SmartDashboard.putNumber("actual position", mExtensionEncoder.getPosition());
+    SmartDashboard.putNumber("actual Extension position", mExtensionEncoder.getPosition());
+    SmartDashboard.putNumber("actual rotation position", mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone);
+
     SmartDashboard.putNumber("output", mLeadExtension.getAppliedOutput());
     // This method will be called once per scheduler run
   }

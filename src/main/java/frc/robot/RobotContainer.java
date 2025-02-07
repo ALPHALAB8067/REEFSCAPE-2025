@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PID_ExtensionCMD;
+import frc.robot.commands.PID_Rotation_CMD;
 import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -26,7 +27,7 @@ public class RobotContainer {
 
   private final ARM_SS mArm_SS = new ARM_SS();
   private final PID_ExtensionCMD mPID_ExtensionCMD = new PID_ExtensionCMD(mArm_SS);
-  private final PID_RotationCMD mPID_RotationCMD = new PID_RotationCMD(mArm_SS);
+  private final PID_Rotation_CMD mPID_Rotation_CMD = new PID_Rotation_CMD(mArm_SS);
   final         CommandXboxController driverXbox = new CommandXboxController(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -46,7 +47,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driverXbox.b().whileTrue(mPID_ExtensionCMD);
-    driverXbox.a().whileTrue(mPID_RotationCMD);
+    driverXbox.a().whileTrue(mPID_Rotation_CMD);
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));

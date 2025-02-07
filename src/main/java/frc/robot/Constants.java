@@ -16,6 +16,7 @@ public final class Constants {
   public static class ArmConstants{
     public static final double ExtensionPouceParTour = 3.49 ;
     public static final double RotationdegresParTour = 154.285;
+    public static final double RotationEncoderSafeZone = 10;
   }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
