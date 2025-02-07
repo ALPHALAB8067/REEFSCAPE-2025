@@ -100,7 +100,7 @@ public class ARM_SS extends SubsystemBase {
     mExtensionPIDController.setReference(SmartDashboard.getNumber("WristSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
   */
-  public void AllInOne(double pLongueur, double pAngleBase/*, pAngleWrist */){
+  public void AllInOne(/*double pLongueur, double pAngleBase*//*, pAngleWrist */){
     RotationGoToPosition();
     ExtensionGoToPosition();
     /*  mExtensionPIDController.setReference(pLongueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
@@ -137,6 +137,7 @@ public class ARM_SS extends SubsystemBase {
     SmartDashboard.putNumber("actual Extension position", mExtensionEncoder.getPosition());
     SmartDashboard.putNumber("actual rotation position", mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone);
     //SmartDashboard.putNumber("actual Wrist Position", mWristEncoder.getPosition());
-    SmartDashboard.putNumber("output", mLeadExtension.getAppliedOutput());
+    SmartDashboard.putNumber("Extension output", mLeadExtension.getAppliedOutput());
+    SmartDashboard.putNumber("Rotation output", mLeadBase.getAppliedOutput());
   }
 }
