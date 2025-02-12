@@ -23,6 +23,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.PositionsDictionnary;
 
 
 public class ARM_SS extends SubsystemBase {
@@ -39,7 +40,10 @@ public class ARM_SS extends SubsystemBase {
   private final SparkMaxConfig mLeadConfig;
   private final SparkMaxConfig mFollowConfig;
   private final SparkMaxConfig mExtensionConfig;
+  private boolean currentlyRunning = false;
+  private boolean done = false;
  // private final SparkMaxConfig mWristConfig;
+ private PositionsDictionnary mPositionsDictionnary;
 
   /** Creates a new ARM_SS. */
   public ARM_SS() {
@@ -86,6 +90,8 @@ public class ARM_SS extends SubsystemBase {
     SmartDashboard.putNumber("extensionSetpoint", 0);
     SmartDashboard.putNumber("rotationSetpoint", 0);
     /*SmartDashboard.putNumber("WristSetpoint", 0);*/
+    PositionsDictionnary mPositionsDictionnary = new PositionsDictionnary();
+    double i = PositionsDictionnary.trajectories.mTrajectory1.get(0).angle;
   }
 
   public void ExtensionGoToPosition(){
@@ -108,6 +114,33 @@ public class ARM_SS extends SubsystemBase {
     */
      /*mWristPIDController.setReference(pAngleWrist, ControlType.kPosition,ClosedLoopSlot.kSlot0);*/
   }
+  public void restart(){
+   currentlyRunning = false;
+   done = false;
+  }
+  public boolean isDone(){
+    return done;
+  }
+  public void change_position_3steps(double angleBase, double longueur, double threshold){
+    if(currentlyRunning == false){
+      mExtensionPIDController.setReference(0, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+      currentlyRunning = true;
+    }
+    else if(currentlyRunning==true){
+            if (mExtensionEncoder.getPosition() <= 0 + 2 ){
+                mRotationPIDController.setReference(angleBase + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+              }
+            if(mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone >= angleBase - 4 && mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone <= angleBase + 4){
+                mExtensionPIDController.setReference(longueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+                currentlyRunning = false;
+                if (mExtensionEncoder.getPosition() == longueur ){
+                  done = true;
+                }
+              }
+
+      }
+    }
+ 
 
   public void ManualExtension(double pSpeed){
     mLeadExtension.set(pSpeed);

@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.MoveIn3Step;
 import frc.robot.commands.PID_ExtensionCMD;
 import frc.robot.commands.All_In_One_CMD;
 import frc.robot.commands.PID_RotationCMD;
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final PID_ExtensionCMD mPID_ExtensionCMD = new PID_ExtensionCMD(mArm_SS);
   private final PID_RotationCMD mPID_RotationCMD = new PID_RotationCMD(mArm_SS);
   private final All_In_One_CMD mAll_In_One = new All_In_One_CMD(mArm_SS);
+  private final MoveIn3Step mMoveIn3Step = new MoveIn3Step(mArm_SS);
   final         CommandXboxController driverXbox = new CommandXboxController(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -50,6 +52,7 @@ public class RobotContainer {
     driverXbox.b().whileTrue(mPID_ExtensionCMD);
     driverXbox.a().whileTrue(mPID_RotationCMD);
     driverXbox.y().whileTrue(mAll_In_One);
+    driverXbox.x().whileTrue(mMoveIn3Step);
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
