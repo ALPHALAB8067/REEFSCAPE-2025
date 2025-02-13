@@ -7,6 +7,7 @@ package frc.robot;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.first.math.proto.Trajectory;
 import frc.robot.PositionsDictionnary.ArmPositionType;
 
 /**
@@ -19,7 +20,7 @@ import frc.robot.PositionsDictionnary.ArmPositionType;
  */
 public final class PositionsDictionnary { 
   
-  public static class ArmPositionType {
+  public  class ArmPositionType {
     public final double angle;
     public final double length;
     public final double threshold;
@@ -31,20 +32,23 @@ public final class PositionsDictionnary {
 
   } 
   }
- public static class trajectories {
-  ArmPositionType mPosition1 = new ArmPositionType(20, 0, 2 );
-  ArmPositionType mPosition2 = new ArmPositionType(40, 0, 2 );
-  ArmPositionType mPosition3 = new ArmPositionType(80, 0, 2 );
-  public static List<ArmPositionType> mTrajectory1 = new ArrayList<>();
-  public static List<ArmPositionType> mTrajectory2 = new ArrayList<>();
-  {
-    mTrajectory1.add(mPosition1);
-    mTrajectory1.add(mPosition2);
-    mTrajectory1.add(mPosition3);
+ public Trajectories() {
+   ArmPositionType mPosition1 = new ArmPositionType(20, 0, 2 );
+   ArmPositionType mPosition2 = new ArmPositionType(40, 0, 2 );
+   ArmPositionType mPosition3 = new ArmPositionType(80, 0, 2 );
+  final  List<ArmPositionType> mTrajectory1 = new ArrayList<>();
+  final   List<ArmPositionType> mTrajectory2 = new ArrayList<>();
 
-    mTrajectory2.add(mPosition3);
-    mTrajectory2.add(mPosition2);
-    mTrajectory2.add(mPosition1);
-  }
+
+}
+public void initializeTrajectories(){
+  
+  mTrajectory1.add(Trajectories.mTrajectory1);
+  mTrajectory1.add(mPosition2);
+  mTrajectory1.add(mPosition3);
+
+  mTrajectory2.add(mPosition3);
+  mTrajectory2.add(mPosition2);
+  mTrajectory2.add(mPosition1);
 }
 }

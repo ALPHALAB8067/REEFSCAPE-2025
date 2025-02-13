@@ -90,8 +90,7 @@ public class ARM_SS extends SubsystemBase {
     SmartDashboard.putNumber("extensionSetpoint", 0);
     SmartDashboard.putNumber("rotationSetpoint", 0);
     /*SmartDashboard.putNumber("WristSetpoint", 0);*/
-    PositionsDictionnary mPositionsDictionnary = new PositionsDictionnary();
-    double i = PositionsDictionnary.trajectories.mTrajectory1.get(0).angle;
+
   }
 
   public void ExtensionGoToPosition(){

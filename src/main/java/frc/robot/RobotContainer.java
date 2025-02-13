@@ -11,6 +11,7 @@ import frc.robot.commands.PID_ExtensionCMD;
 import frc.robot.commands.All_In_One_CMD;
 import frc.robot.commands.PID_RotationCMD;
 import frc.robot.subsystems.ARM_SS;
+import frc.robot.PositionsDictionnary;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -32,11 +33,16 @@ public class RobotContainer {
   private final All_In_One_CMD mAll_In_One = new All_In_One_CMD(mArm_SS);
   private final MoveIn3Step mMoveIn3Step = new MoveIn3Step(mArm_SS);
   final         CommandXboxController driverXbox = new CommandXboxController(0);
+  private final PositionsDictionnary mPositionsDictionnary = new PositionsDictionnary();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+
     configureBindings();
+    mPositionsDictionnary.initializeTrajectories(mPositionsDictionnary);
+
+    
   }
 
   /**
