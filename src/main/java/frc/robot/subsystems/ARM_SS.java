@@ -90,7 +90,7 @@ public class ARM_SS extends SubsystemBase {
     SmartDashboard.putNumber("extensionSetpoint", 0);
     SmartDashboard.putNumber("rotationSetpoint", 0);
     /*SmartDashboard.putNumber("WristSetpoint", 0);*/
-    PositionsDictionnary.mTrajectory1.get(0);
+   
   }
 
   public void ExtensionGoToPosition(){
@@ -129,11 +129,12 @@ public class ARM_SS extends SubsystemBase {
             if (mExtensionEncoder.getPosition() <= 0 + 2 ){
                 mRotationPIDController.setReference(angleBase + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
               }
-            if(mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone >= angleBase - 4 && mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone <= angleBase + 4){
+            if((mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone >= angleBase - 10 )&& (mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone <= angleBase + 10)){
                 mExtensionPIDController.setReference(longueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
-                currentlyRunning = false;
-                if (mExtensionEncoder.getPosition() == longueur ){
+                //currentlyRunning = false;
+                if ((mExtensionEncoder.getPosition() >= longueur-2) && (mExtensionEncoder.getPosition() <= longueur + 2) ){
                   done = true;
+                  currentlyRunning = false;
                 }
               }
 
@@ -171,5 +172,6 @@ public class ARM_SS extends SubsystemBase {
     //SmartDashboard.putNumber("actual Wrist Position", mWristEncoder.getPosition());
     SmartDashboard.putNumber("Extension output", mLeadExtension.getAppliedOutput());
     SmartDashboard.putNumber("Rotation output", mLeadBase.getAppliedOutput());
+    SmartDashboard.putBoolean("done", done);
   }
 }
