@@ -40,8 +40,6 @@ public class RobotContainer {
     // Configure the trigger bindings
 
     configureBindings();
-    mPositionsDictionnary.initializeTrajectories(mPositionsDictionnary);
-
     
   }
 

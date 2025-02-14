@@ -43,7 +43,7 @@ public class ARM_SS extends SubsystemBase {
   private boolean currentlyRunning = false;
   private boolean done = false;
  // private final SparkMaxConfig mWristConfig;
- private PositionsDictionnary mPositionsDictionnary;
+
 
   /** Creates a new ARM_SS. */
   public ARM_SS() {
@@ -90,7 +90,7 @@ public class ARM_SS extends SubsystemBase {
     SmartDashboard.putNumber("extensionSetpoint", 0);
     SmartDashboard.putNumber("rotationSetpoint", 0);
     /*SmartDashboard.putNumber("WristSetpoint", 0);*/
-
+    PositionsDictionnary.mTrajectory1.get(0);
   }
 
   public void ExtensionGoToPosition(){

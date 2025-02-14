@@ -6,9 +6,9 @@ package frc.robot;
 
 import java.util.ArrayList;
 import java.util.List;
+import frc.robot.subsystems.PositionType_SS;
 
-import edu.wpi.first.math.proto.Trajectory;
-import frc.robot.PositionsDictionnary.ArmPositionType;
+
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -19,31 +19,18 @@ import frc.robot.PositionsDictionnary.ArmPositionType;
  * constants are needed, to reduce verbosity.
  */
 public final class PositionsDictionnary { 
-  
-  public  class ArmPositionType {
-    public final double angle;
-    public final double length;
-    public final double threshold;
+  public static List<PositionType_SS> mTrajectory1;
+  public static List<PositionType_SS> mTrajectory2;
 
-    public ArmPositionType(double angle, double length, double threshold) {
-      this.angle = angle;
-      this.length = length;
-      this.threshold = threshold;
-
-  } 
-  }
- public Trajectories() {
-   ArmPositionType mPosition1 = new ArmPositionType(20, 0, 2 );
-   ArmPositionType mPosition2 = new ArmPositionType(40, 0, 2 );
-   ArmPositionType mPosition3 = new ArmPositionType(80, 0, 2 );
-  final  List<ArmPositionType> mTrajectory1 = new ArrayList<>();
-  final   List<ArmPositionType> mTrajectory2 = new ArrayList<>();
+ public PositionsDictionnary() {
+ PositionType_SS mPosition1 = new PositionType_SS(0.0, 0.0, 2.0);
+ PositionType_SS mPosition2 = new PositionType_SS(40.0, 0.0, 2.0);
+ PositionType_SS mPosition3 = new PositionType_SS(80.0, 0.0, 2.0);
+ mTrajectory1 = new ArrayList<>();
+ mTrajectory2 = new ArrayList<>();
 
 
-}
-public void initializeTrajectories(){
-  
-  mTrajectory1.add(Trajectories.mTrajectory1);
+  mTrajectory1.add(mPosition1);
   mTrajectory1.add(mPosition2);
   mTrajectory1.add(mPosition3);
 
@@ -51,4 +38,5 @@ public void initializeTrajectories(){
   mTrajectory2.add(mPosition2);
   mTrajectory2.add(mPosition1);
 }
+
 }
