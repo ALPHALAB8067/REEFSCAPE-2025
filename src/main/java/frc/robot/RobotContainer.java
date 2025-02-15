@@ -164,8 +164,8 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-    //return drivebase.getAutonomousCommand("Straight Auto");
-    return drivebase.sysIdDriveMotorCommand();
+    return drivebase.getAutonomousCommand("Straight Auto");
+    //return drivebase.sysIdDriveMotorCommand();
     //driverXbox.button(1).whileTrue(drivebase.sysIdDriveMotorCommand());
 
   }
