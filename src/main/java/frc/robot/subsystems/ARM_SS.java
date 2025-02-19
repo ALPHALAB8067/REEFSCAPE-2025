@@ -129,7 +129,7 @@ public class ARM_SS extends SubsystemBase {
             if (mExtensionEncoder.getPosition() <= 0 + 2 ){
                 mRotationPIDController.setReference(angleBase + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
               }
-            if(mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone >= angleBase - 4 && mArmEncoder.getPosition() +Constants.ArmConstants.RotationEncoderSafeZone <= angleBase + 4){
+            if(mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone >= angleBase - 4 && mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone <= angleBase + 4){
                 mExtensionPIDController.setReference(longueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
                 currentlyRunning = false;
                 if (mExtensionEncoder.getPosition() == longueur ){
