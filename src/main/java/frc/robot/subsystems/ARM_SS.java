@@ -120,7 +120,7 @@ public class ARM_SS extends SubsystemBase {
   public boolean isDone(){
     return done;
   }
-  public void change_position_3steps(double angleBase, double longueur, double threshold){
+  public void change_position_3steps(double angleBase, double longueur, double threshold){//threshold is not used curently but might be usefull
     if(currentlyRunning == false){
       mExtensionPIDController.setReference(0, ControlType.kPosition,ClosedLoopSlot.kSlot0);
       currentlyRunning = true;
@@ -132,7 +132,7 @@ public class ARM_SS extends SubsystemBase {
             if(mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone >= angleBase - 4 && mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone <= angleBase + 4){
                 mExtensionPIDController.setReference(longueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
                 //currentlyRunning = false;
-                if ((mExtensionEncoder.getPosition() >= longueur-2) && (mExtensionEncoder.getPosition() <= longueur + 2) ){
+                if ((mExtensionEncoder.getPosition() >= longueur-1) && (mExtensionEncoder.getPosition() <= longueur + 1) ){
                   done = true;
                   currentlyRunning = false;
                 }
