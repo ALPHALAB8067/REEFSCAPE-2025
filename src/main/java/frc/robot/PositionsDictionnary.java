@@ -38,5 +38,5 @@ public final class PositionsDictionnary {
   mTrajectory2.add(mPosition2);
   mTrajectory2.add(mPosition1);
 }
-
+  
 }

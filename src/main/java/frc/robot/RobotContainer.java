@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.commands.Autos;
+import frc.robot.commands.ButtonTest;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.MoveIn3Step;
 import frc.robot.commands.PID_ExtensionCMD;
@@ -12,6 +13,7 @@ import frc.robot.commands.All_In_One_CMD;
 import frc.robot.commands.PID_RotationCMD;
 import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -25,14 +27,19 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
+  final         CommandXboxController driverXbox = new CommandXboxController(0);
+  final         ButtonBox mButtonBox = new ButtonBox(1, 2);
+  final         GenericHID mGenericHID = new GenericHID(1);
+  Trigger btn1 = new Trigger(()->mGenericHID.getRawButton(1));
   private final ARM_SS mArm_SS = new ARM_SS();
   private final PID_ExtensionCMD mPID_ExtensionCMD = new PID_ExtensionCMD(mArm_SS);
   private final PID_RotationCMD mPID_RotationCMD = new PID_RotationCMD(mArm_SS);
   private final All_In_One_CMD mAll_In_One = new All_In_One_CMD(mArm_SS);
   private final MoveIn3Step mMoveIn3Step = new MoveIn3Step(mArm_SS);
-  final         CommandXboxController driverXbox = new CommandXboxController(0);
+
   private final PositionsDictionnary mPositionsDictionnary = new PositionsDictionnary();
+  private final ButtonTest mButtonTest = new ButtonTest();
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -56,9 +63,10 @@ public class RobotContainer {
     driverXbox.a().whileTrue(mPID_RotationCMD);
     driverXbox.y().whileTrue(mAll_In_One);
     driverXbox.x().whileTrue(mMoveIn3Step);
+    btn1.whileTrue(mButtonTest);
+    
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
