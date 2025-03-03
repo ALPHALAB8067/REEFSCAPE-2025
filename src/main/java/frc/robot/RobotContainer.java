@@ -30,7 +30,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   final         CommandXboxController driverXbox = new CommandXboxController(0);
-  final         GenericHID mGenericHID = new GenericHID(1);
+  final         GenericHID mGenericHID = new GenericHID(2);
   Trigger btn1 = new Trigger(()->mGenericHID.getRawButton(1));
   Trigger btn2 = new Trigger(()->mGenericHID.getRawButton(2));
 
