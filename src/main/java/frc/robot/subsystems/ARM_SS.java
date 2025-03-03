@@ -7,23 +7,19 @@ package frc.robot.subsystems;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkAbsoluteEncoder;
-import com.revrobotics.spark.SparkClosedLoopController;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkMaxAlternateEncoder;
-import com.revrobotics.spark.SparkRelativeEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.config.SparkMaxConfigAccessor;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.PositionsDictionnary;
 
 
 public class ARM_SS extends SubsystemBase {
@@ -43,7 +39,7 @@ public class ARM_SS extends SubsystemBase {
   private boolean currentlyRunning = false;
   private boolean done = false;
  // private final SparkMaxConfig mWristConfig;
-  private PositionType_SS mPositionType_SS;
+  private PositionType_SS mPositionType1;
 
   /** Creates a new ARM_SS. */
   public ARM_SS() {
@@ -90,7 +86,7 @@ public class ARM_SS extends SubsystemBase {
     SmartDashboard.putNumber("extensionSetpoint", 0);
     SmartDashboard.putNumber("rotationSetpoint", 0);
     /*SmartDashboard.putNumber("WristSetpoint", 0);*/
-   // mPositionType_SS = new PositionsDictionnary.mTrajectory1.get(0);
+    //mPositionType1 = PositionsDictionnary.mTrajectory1.get(0);
   }
 
   public void ExtensionGoToPosition(){
@@ -140,8 +136,31 @@ public class ARM_SS extends SubsystemBase {
 
       }
     }
- 
 
+    public double armPosition (){
+      return mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone;
+    }
+  /**public void strategie1(double angleBase, double longueur,double wristAngle ,double threshold){//threshold is not used curently but might be usefull
+      if(currentlyRunning == false){
+        mRotationPIDController.setReference(angleBase + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+        currentlyRunning = true;
+      }
+      else if(currentlyRunning==true){
+           //   if (mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone >= angleBase - 10/*arm tolerance */ /*peut transformé condition en méthode de type boolean*///&& mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone <= angleBase + 10/*arm tolerance */ ){
+           //       mWristPIDController.setReference(wristAngle + Constants.ArmConstants.WristEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+             //   }
+             // if(mWristEncoder.getPosition() - Constants.ArmConstants.WristEncoderSafeZone >= wristAngle - 5/*wrist tolerance */ && mWristEncoder.getPosition() - Constants.ArmConstants.WristEncoderSafeZone <= wristAngle + 5 /*wrist tolerance */){
+              //    mExtensionPIDController.setReference(longueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+                  
+                 /*  if ((mExtensionEncoder.getPosition() >= longueur-1) && (mExtensionEncoder.getPosition() <= longueur + 1) ){
+                    done = true;
+                    currentlyRunning = false;
+                  }
+                }
+  
+        }
+      }
+*/
   public void ManualExtension(double pSpeed){
     mLeadExtension.set(pSpeed);
   }
