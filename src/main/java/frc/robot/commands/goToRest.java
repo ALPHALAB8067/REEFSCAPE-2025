@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.PositionsDictionnary;
 import frc.robot.subsystems.ARM_SS;
@@ -43,6 +44,9 @@ public class goToRest extends Command {
     }
     if(mCurrent == PositionsDictionnary.mPositionL4){
       mArm_SS.S3(mTarget);
+    }
+    if (mCurrent == PositionsDictionnary.mPositionCoralStation){
+      mArm_SS.S2B(mTarget);
     }
   }
 

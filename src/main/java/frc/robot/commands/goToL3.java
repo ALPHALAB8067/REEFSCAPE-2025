@@ -44,6 +44,9 @@ public class goToL3 extends Command {
     if(mCurrent == PositionsDictionnary.mPositionL4){
       mArm_SS.S3(mTarget);
     }
+    if (mCurrent == PositionsDictionnary.mPositionCoralStation){
+      mArm_SS.S2B(mTarget);
+    }
   }
 
   // Called once the command ends or is interrupted.
