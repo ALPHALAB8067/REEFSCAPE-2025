@@ -1,13 +1,13 @@
-package frc.robot.commands.intake;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSS;
 
-public class intakeWheelReverseCMD extends Command {
+public class intakeWheelCMD extends Command {
 
   private final IntakeSS intakeSS;
 
-  public intakeWheelReverseCMD(IntakeSS pIntakeSS) {
+  public intakeWheelCMD(IntakeSS pIntakeSS) {
     intakeSS = pIntakeSS;
   }
 
@@ -16,7 +16,7 @@ public class intakeWheelReverseCMD extends Command {
 
   @Override
   public void execute() {
-    intakeSS.wheelReverse();
+    intakeSS.wheelTurn();
   }
 
   @Override
@@ -26,4 +26,9 @@ public class intakeWheelReverseCMD extends Command {
   public boolean isFinished() {
     return false;
   }
+
+public Command until(boolean intaked) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'until'");
+}
 }

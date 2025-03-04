@@ -1,13 +1,13 @@
-package frc.robot.commands.wrist;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.WristSS;
 
-public class WristIntakeCMD extends Command {
+public class WristExitCMD extends Command {
 
   private final WristSS wristSS;
 
-  public WristIntakeCMD(WristSS pWristSS) {
+  public WristExitCMD(WristSS pWristSS) {
       
     wristSS = pWristSS;
   
@@ -18,7 +18,7 @@ public class WristIntakeCMD extends Command {
 
   @Override
   public void execute() {
-    wristSS.turnWheel();
+    wristSS.reverseWheel();
   }
 
   @Override
@@ -28,9 +28,4 @@ public class WristIntakeCMD extends Command {
   public boolean isFinished() {
     return false;
   }
-
-public Command until(boolean b) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'until'");
-}
 }

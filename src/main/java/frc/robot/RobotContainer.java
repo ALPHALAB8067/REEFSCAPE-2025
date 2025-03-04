@@ -8,9 +8,20 @@ import frc.robot.commands.ButtonTest;
 import frc.robot.commands.MoveIn3Step;
 import frc.robot.commands.MoveIn3StepSecondPosition;
 import frc.robot.commands.PID_ExtensionCMD;
+import frc.robot.commandgroups.getCoralCMD;
 import frc.robot.commands.All_In_One_CMD;
 import frc.robot.commands.PID_RotationCMD;
+import frc.robot.commands.WristExitCMD;
+import frc.robot.commands.WristGoToAngledCMD;
+import frc.robot.commands.WristGoToStraightCMD;
+import frc.robot.commands.WristIntakeCMD;
+import frc.robot.commands.intakeDownCMD;
+import frc.robot.commands.intakeUpCMD;
+import frc.robot.commands.intakeWheelCMD;
+import frc.robot.commands.intakeWheelReverseCMD;
 import frc.robot.subsystems.ARM_SS;
+import frc.robot.subsystems.IntakeSS;
+import frc.robot.subsystems.WristSS;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -41,6 +52,22 @@ public class RobotContainer {
   private final ButtonTest mButtonTest = new ButtonTest();
 
 
+  private final IntakeSS mIntakeSS = new IntakeSS();
+  private final WristSS mWristSS = new WristSS();
+  private final intakeDownCMD mIntakeDownCMD = new intakeDownCMD(mIntakeSS);
+  private final intakeUpCMD mIntakeUpCMD = new intakeUpCMD(mIntakeSS);
+  private final intakeWheelCMD mIntakeWheelCMD = new intakeWheelCMD(mIntakeSS);
+  private final intakeWheelReverseCMD mIntakeWheelReverseCMD = new intakeWheelReverseCMD(mIntakeSS);
+  private final WristGoToAngledCMD mWristGoToAngledCMD = new WristGoToAngledCMD(mWristSS);
+  private final WristGoToStraightCMD mWristGoToStraightCMD = new WristGoToStraightCMD(mWristSS);
+  private final WristExitCMD mWristExitCMD = new WristExitCMD(mWristSS);
+  private final WristIntakeCMD mWristIntakeCMD = new WristIntakeCMD(mWristSS);
+  private final getCoralCMD mGetCoralCMD = new getCoralCMD(mIntakeSS, mWristSS);
+  
+  
+
+
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -66,6 +93,17 @@ public class RobotContainer {
     btn1.whileTrue(mMoveIn3Step);
     btn2.whileTrue(mMoveIn3StepSecondPosition);
     
+    driverXbox.leftBumper().onTrue(mIntakeDownCMD);
+    driverXbox.rightBumper().onTrue(mIntakeUpCMD);
+    driverXbox.leftTrigger(0.2).onTrue(mIntakeWheelCMD);
+    
+    driverXbox.povDown().onTrue(mWristGoToAngledCMD);
+    driverXbox.povRight().onTrue(mWristGoToStraightCMD);
+    driverXbox.povLeft().onTrue(mWristIntakeCMD);
+    driverXbox.povUp().onTrue(mWristExitCMD);
+    
+    driverXbox.start().onTrue(mGetCoralCMD);
+
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
 
