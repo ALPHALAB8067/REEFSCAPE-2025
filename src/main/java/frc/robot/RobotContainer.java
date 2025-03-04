@@ -96,6 +96,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    
     driverXbox.b().whileTrue(mPID_ExtensionCMD);
     driverXbox.a().whileTrue(mPID_RotationCMD);
     driverXbox.y().whileTrue(mAll_In_One);
@@ -115,7 +116,7 @@ public class RobotContainer {
     btn20.onTrue(mWristExitCMD);
     btn21.onTrue(mGetCoralCMD);
 
-    
+
     //joystick version
     driverXbox.leftBumper().onTrue(mIntakeDownCMD);
     driverXbox.rightBumper().onTrue(mIntakeUpCMD);

@@ -1,15 +1,12 @@
 package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.WristGoToAngledCMD;
 import frc.robot.commands.WristIntakeCMD;
 import frc.robot.commands.intakeDownCMD;
 import frc.robot.commands.intakeUpCMD;
 import frc.robot.commands.intakeWheelCMD;
-import frc.robot.subsystems.IntakeSS;
-import frc.robot.subsystems.WristSS;
 import frc.robot.subsystems.IntakeSS;
 import frc.robot.subsystems.WristSS;
 
@@ -29,8 +26,8 @@ public class getCoralCMD extends SequentialCommandGroup {
       
     new ParallelCommandGroup(
       new intakeWheelCMD(intake).until(intake.getIntaked() == true),
-      new WristGoToAngledCMD(wrist),
-      new intakeDownCMD(intake)
+      new intakeDownCMD(intake),
+      new WristGoToAngledCMD(wrist)
     ),
 
     new ParallelCommandGroup(

@@ -106,7 +106,7 @@ public class ARM_SS extends SubsystemBase {
   }
 
   public void ExtensionGoToPosition(){
-    mExtensionPIDController.setReference( SmartDashboard.getNumber("extensionSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
+    mExtensionPIDController.setReference(SmartDashboard.getNumber("extensionSetpoint", 0), ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
 
   public void RotationGoToPosition(){    
@@ -132,7 +132,7 @@ public class ARM_SS extends SubsystemBase {
     return done;
   }
 
-  public void change_position_3steps(double armAngle, double longueur, double threshold){//threshold is not used curently but might be usefull
+  public void change_position_3steps(double armAngle, double longueur, double threshold){//threshold is not used curently but might be useful
     if(currentlyRunning == false){
       mExtensionPIDController.setReference(0, ControlType.kPosition,ClosedLoopSlot.kSlot0);
       currentlyRunning = true;
@@ -153,7 +153,7 @@ public class ARM_SS extends SubsystemBase {
       }
     }
 
-    public boolean isArmInPosition (double wantedAngle,double tolerance){
+    public boolean isArmInPosition (double wantedAngle, double tolerance) {
       return (mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone >= wantedAngle - tolerance && mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone <= wantedAngle + tolerance);
     }
     public boolean isLenghtInPosition(double wantedLenght,double tolerance){
