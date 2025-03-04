@@ -45,7 +45,7 @@ public class goToL4 extends Command {
       mArm_SS.S1A(mTarget);
     }
     if (mCurrent == PositionsDictionnary.mPositionCoralStation){
-      mArm_SS.S2B(mTarget);
+      mArm_SS.S1B(mTarget);
     }
   }
 

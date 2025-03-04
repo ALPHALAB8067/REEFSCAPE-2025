@@ -32,7 +32,7 @@ public class goToCoralStation extends Command {
       mArm_SS.S1B(mTarget);
     }
     if(mCurrent == PositionsDictionnary.mPositionL1){
-      mArm_SS.S1B(mTarget);
+      mArm_SS.S3(mTarget);
     }
     if(mCurrent == PositionsDictionnary.mPositionL2){
      mArm_SS.S1B(mTarget);
@@ -41,11 +41,11 @@ public class goToCoralStation extends Command {
       mArm_SS.S1B(mTarget);
     }
     if(mCurrent == PositionsDictionnary.mPositionL4){
-      //does nothing 
-      mArm_SS.S1A(mTarget);
+      mArm_SS.S3(mTarget);
     }
     if (mCurrent == PositionsDictionnary.mPositionCoralStation){
-      mArm_SS.S2B(mTarget);
+      //does nothing 
+      mArm_SS.S1A(mTarget);
     }
   }
 
