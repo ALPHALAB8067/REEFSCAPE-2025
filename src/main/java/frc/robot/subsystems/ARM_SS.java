@@ -198,7 +198,7 @@ public class ARM_SS extends SubsystemBase {
           currentlyRunning = true;
         }
         else if(currentlyRunning==true){
-          if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPostition(pPosition.armLength, pPosition.lenghtTolerance)){
+          if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPosition(pPosition.armLength, pPosition.lenghtTolerance)){
             done = true;
             currentlyRunning = false;
             }
@@ -220,7 +220,7 @@ public class ARM_SS extends SubsystemBase {
           }
           else if(currentlyRunning==true){
             //is everything in position
-            if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPostition(pPosition.armLength, pPosition.lenghtTolerance)){
+            if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPosition(pPosition.armLength, pPosition.lenghtTolerance)){
               done = true;
               currentlyRunning = false;
               }
@@ -242,7 +242,7 @@ public class ARM_SS extends SubsystemBase {
         }
         else if(currentlyRunning==true){
           //is everything in position
-          if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPostition(pPosition.armLength, pPosition.lenghtTolerance)){
+          if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPosition(pPosition.armLength, pPosition.lenghtTolerance)){
             done = true;
             currentlyRunning = false;
             } 
@@ -263,11 +263,11 @@ public class ARM_SS extends SubsystemBase {
           }
           else if(currentlyRunning==true){
             //is everything in position
-            if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPostition(pPosition.armLength, pPosition.lenghtTolerance)){
+            if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPosition(pPosition.armLength, pPosition.lenghtTolerance)){
               done = true;
               currentlyRunning = false;
               }
-              else if(isLenghtInPostition(pPosition.armLength, pPosition.lenghtTolerance) && isWristInPosition(pPosition.wrist, pPosition.wristTolerance)){
+              else if(isLenghtInPosition(pPosition.armLength, pPosition.lenghtTolerance) && isWristInPosition(pPosition.wrist, pPosition.wristTolerance)){
                 mArmPIDControler.setReference(pPosition.armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
                 }
                   }
@@ -281,11 +281,11 @@ public class ARM_SS extends SubsystemBase {
           currentlyRunning = true;
         }
         else if(currentlyRunning==true){
-          if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPostition(pPosition.armLength, pPosition.lenghtTolerance)){
+          if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isWristInPosition(pPosition.wrist,pPosition.wristTolerance) && isLenghtInPosition(pPosition.armLength, pPosition.lenghtTolerance)){
             done = true;
             currentlyRunning = false;
             }
-            else if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isLenghtInPostition(pPosition.armLength, pPosition.lenghtTolerance)){
+            else if (isArmInPosition(pPosition.armAngle, pPosition.armTolerance) && isLenghtInPosition(pPosition.armLength, pPosition.lenghtTolerance)){
               mWristPIDController.setReference(pPosition.armLength, ControlType.kPosition,ClosedLoopSlot.kSlot0);
               }
               else if(isArmInPosition(pPosition.armAngle, pPosition.armTolerance)){

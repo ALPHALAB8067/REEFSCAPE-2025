@@ -1,6 +1,8 @@
 package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.goToL2;
+import frc.robot.commands.goToRest;
 import frc.robot.commands.intakeUpCMD;
 import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.IntakeSS;
@@ -17,8 +19,8 @@ public class closeRobotCMD extends SequentialCommandGroup {
 
     addCommands(
 
-      new intakeUpCMD(intakeSS)
-      //arm to zero
+      new intakeUpCMD(intakeSS),
+      new goToRest(armSS)
 
     );
   }
