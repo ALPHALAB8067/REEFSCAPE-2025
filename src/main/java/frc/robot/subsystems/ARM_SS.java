@@ -31,7 +31,7 @@ public class ARM_SS extends SubsystemBase {
   private final SparkAbsoluteEncoder mArmEncoder;
   private final SparkAbsoluteEncoder mWristEncoder;
   private final SparkClosedLoopController mExtensionPIDController;
-  private final SparkClosedLoopController mRotationPIDController;
+  private final SparkClosedLoopController mArmPIDControler;
   private final SparkClosedLoopController mWristPIDController;
   private final SparkMaxConfig mLeadConfig;
   private final SparkMaxConfig mFollowConfig;
@@ -96,7 +96,7 @@ public class ARM_SS extends SubsystemBase {
     mWristEncoder = mWristMotor.getAbsoluteEncoder();
 
     mExtensionPIDController = mLeadExtension.getClosedLoopController();
-    mRotationPIDController = mLeadBase.getClosedLoopController();
+    mArmPIDControler = mLeadBase.getClosedLoopController();
     mWristPIDController = mWristMotor.getClosedLoopController();
 
     SmartDashboard.putNumber("extensionSetpoint", 0);
@@ -110,7 +110,7 @@ public class ARM_SS extends SubsystemBase {
   }
 
   public void RotationGoToPosition(){    
-    mRotationPIDController.setReference(SmartDashboard.getNumber("rotationSetpoint", 0) + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+    mArmPIDControler.setReference(SmartDashboard.getNumber("rotationSetpoint", 0) + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
   }
 
   public void WristGoToPosition(){
@@ -139,7 +139,7 @@ public class ARM_SS extends SubsystemBase {
     }
     else if(currentlyRunning==true){
             if (mExtensionEncoder.getPosition() <= 0 + 2 ){
-                mRotationPIDController.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+                mArmPIDControler.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
               }
             if(mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone >= armAngle - 10 && mArmEncoder.getPosition() - Constants.ArmConstants.RotationEncoderSafeZone <= armAngle + 10){
                 mExtensionPIDController.setReference(longueur, ControlType.kPosition,ClosedLoopSlot.kSlot0);
@@ -165,7 +165,7 @@ public class ARM_SS extends SubsystemBase {
 
    /*  public void strategie1A(double armAngle,double armTolerance, double lenght,double lenghtTolerance,double wristAngle ,double wristTolerance,double rotationWrist){
       if(currentlyRunning == false){
-        mRotationPIDController.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+        mArmPIDControler.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
         currentlyRunning = true;
       }
       else if(currentlyRunning==true){
@@ -186,10 +186,10 @@ public class ARM_SS extends SubsystemBase {
 */
 
 
-      //arm -> wrist -> longueur 
+        //arm -> wrist -> longueur 
       public void strategie1A_awl(double armAngle,double armTolerance, double lenght,double lenghtTolerance,double wristAngle ,double wristTolerance){
         if(currentlyRunning == false){
-          mRotationPIDController.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+          mArmPIDControler.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
           currentlyRunning = true;
         }
         else if(currentlyRunning==true){
@@ -206,10 +206,11 @@ public class ARM_SS extends SubsystemBase {
     
           }
         }
+
         //angle -> wrist + longueur
       public void strategie1B_awl(double armAngle,double armTolerance, double lenght,double lenghtTolerance,double wristAngle ,double wristTolerance){
           if(currentlyRunning == false){
-            mRotationPIDController.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+            mArmPIDControler.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
             currentlyRunning = true;
           }
           else if(currentlyRunning==true){
@@ -227,8 +228,8 @@ public class ARM_SS extends SubsystemBase {
                 
             }
           
-            //wrist -> longueur + angle
-      public void strategie2_wla(double armAngle,double armTolerance, double lenght,double lenghtTolerance,double wristAngle ,double wristTolerance){
+        //wrist -> longueur + angle
+      public void strategie2B_wla(double armAngle,double armTolerance, double lenght,double lenghtTolerance,double wristAngle ,double wristTolerance){
         if(currentlyRunning == false){
           //start wrist
           mWristPIDController.setReference(wristAngle + Constants.ArmConstants.WristEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
@@ -242,7 +243,7 @@ public class ARM_SS extends SubsystemBase {
             } 
             // if wrist is in position start lenght and angle
             else if(isWristInPosition(wristAngle, wristTolerance)){
-            mRotationPIDController.setReference(armAngle + Constants.ArmConstants.WristEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+            mArmPIDControler.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
             mExtensionPIDController.setReference(lenght, ControlType.kPosition,ClosedLoopSlot.kSlot0);
             }
         }
@@ -251,7 +252,7 @@ public class ARM_SS extends SubsystemBase {
         //longueur + wrist -> angle
       public void strategie3_lwa(double armAngle,double armTolerance, double lenght,double lenghtTolerance,double wristAngle ,double wristTolerance){
           if(currentlyRunning == false){
-            mExtensionPIDController.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+            mExtensionPIDController.setReference(lenght , ControlType.kPosition,ClosedLoopSlot.kSlot0);
             mWristPIDController.setReference(wristAngle + Constants.ArmConstants.WristEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
             currentlyRunning = true;
           }
@@ -262,16 +263,16 @@ public class ARM_SS extends SubsystemBase {
               currentlyRunning = false;
               }
               else if(isLenghtInPosition(lenght, lenghtTolerance) && isWristInPosition(wristAngle, wristTolerance)){
-                mRotationPIDController.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+                mArmPIDControler.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
                 }
                   }
                 
             }
 
-                    //angle -> longueur -> wrist
+        //angle -> longueur -> wrist
       public void strategie4_alw(double armAngle,double armTolerance, double lenght,double lenghtTolerance,double wristAngle ,double wristTolerance){
         if(currentlyRunning == false){
-          mRotationPIDController.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
+          mArmPIDControler.setReference(armAngle + Constants.ArmConstants.RotationEncoderSafeZone, ControlType.kPosition,ClosedLoopSlot.kSlot0);
           currentlyRunning = true;
         }
         else if(currentlyRunning==true){
@@ -288,6 +289,7 @@ public class ARM_SS extends SubsystemBase {
     
           }
         }
+
   public void ManualExtension(double pSpeed){
     mLeadExtension.set(pSpeed);
   }
