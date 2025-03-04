@@ -18,6 +18,7 @@ import frc.robot.subsystems.PositionType_SS;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+<<<<<<< HEAD
 public final class PositionsDictionnary { 
   public static List<PositionType_SS> mTrajectory1;
   public static List<PositionType_SS> mTrajectory2;
@@ -38,5 +39,16 @@ public final class PositionsDictionnary {
   mTrajectory2.add(mPosition2);
   mTrajectory2.add(mPosition1);
 }
+=======
+public final class PositionsDictionnary {                        //(angle bras, angle wrist, longueur bras, tolerance bras, tolerance wrist, tolerance longueur, claw)
+  public static PositionType_SS mPositionRest = new PositionType_SS(0,     115,0, 10.0,       4,     2,  90);
+  public static PositionType_SS mPositionL1 = new PositionType_SS(  45,          -85, 4, 10.0,4,     2,  0);
+  public static PositionType_SS mPositionL2 = new PositionType_SS(  0,     53, 0, 10.0,       4,     2,  90);
+  public static PositionType_SS mPositionL3 = new PositionType_SS(  34,    23, 6, 10.0,       4,     2,  90);
+  public static PositionType_SS mPositionL4 = new PositionType_SS(  70,          -30, 30,10.0,4,     2,  90);
+
+  public static PositionType_SS mPositionCoralStation = new PositionType_SS(45, -45,  5, 2.0,2.0,2.0,0);
+  //public static PositionType_SS mPositionIntake = new PositionType_SS(0.0, 0.0, 2.0,2.0,2.0,2.0,0);
+>>>>>>> Antoine
   
 }
