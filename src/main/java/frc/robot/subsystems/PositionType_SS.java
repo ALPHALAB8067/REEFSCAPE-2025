@@ -6,23 +6,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-<<<<<<< HEAD
-public class PositionType_SS extends SubsystemBase {
-  /** Creates a new PositionDictionnary_SS. */
-  double angle;
-  double length;
-  double threshold;
-  public PositionType_SS(double pAngle, double pLength, double pThreshold) {
-    this.angle = pAngle;
-    this.length = pLength;
-    this.threshold = pThreshold;
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-=======
 public class PositionType_SS  {
   /** Creates a new PositionDictionnary_SS. */
   double armAngle;
@@ -45,5 +28,4 @@ public class PositionType_SS  {
   }
 
 
->>>>>>> Antoine
 }

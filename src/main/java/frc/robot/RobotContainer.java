@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-<<<<<<< HEAD
 import frc.robot.commands.ButtonTest;
 import frc.robot.commands.MoveIn3Step;
 import frc.robot.commands.MoveIn3StepSecondPosition;
@@ -23,7 +22,6 @@ import frc.robot.commands.intakeWheelReverseCMD;
 import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.IntakeSS;
 import frc.robot.subsystems.WristSS;
-=======
 import frc.robot.commands.Autos;
 import frc.robot.commands.ButtonTest;
 import frc.robot.commands.ExampleCommand;
@@ -34,7 +32,6 @@ import frc.robot.commands.All_In_One_CMD;
 import frc.robot.commands.PID_RotationCMD;
 import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.ExampleSubsystem;
->>>>>>> Antoine
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -48,16 +45,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-<<<<<<< HEAD
-=======
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
->>>>>>> Antoine
 
   final         CommandXboxController driverXbox = new CommandXboxController(0);
   final         GenericHID mGenericHID = new GenericHID(2);
   Trigger btn1 = new Trigger(()->mGenericHID.getRawButton(1));
   Trigger btn2 = new Trigger(()->mGenericHID.getRawButton(2));
-<<<<<<< HEAD
   Trigger btn3 = new Trigger(()->mGenericHID.getRawButton(3));
   Trigger btn4 = new Trigger(()->mGenericHID.getRawButton(4));
   Trigger btn5 = new Trigger(()->mGenericHID.getRawButton(5));
@@ -68,8 +60,6 @@ public class RobotContainer {
   Trigger btn20 = new Trigger(()->mGenericHID.getRawButton(20));
   Trigger btn21 = new Trigger(()->mGenericHID.getRawButton(21));
   Trigger btn22 = new Trigger(()->mGenericHID.getRawButton(22));
-=======
->>>>>>> Antoine
 
   private final ARM_SS mArm_SS = new ARM_SS();
   private final PID_ExtensionCMD mPID_ExtensionCMD = new PID_ExtensionCMD(mArm_SS);
@@ -82,7 +72,6 @@ public class RobotContainer {
   private final ButtonTest mButtonTest = new ButtonTest();
 
 
-<<<<<<< HEAD
   private final IntakeSS mIntakeSS = new IntakeSS();
   private final WristSS mWristSS = new WristSS();
   private final intakeDownCMD mIntakeDownCMD = new intakeDownCMD(mIntakeSS);
@@ -99,8 +88,6 @@ public class RobotContainer {
 
 
 
-=======
->>>>>>> Antoine
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -119,10 +106,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-<<<<<<< HEAD
     
-=======
->>>>>>> Antoine
     driverXbox.b().whileTrue(mPID_ExtensionCMD);
     driverXbox.a().whileTrue(mPID_RotationCMD);
     driverXbox.y().whileTrue(mAll_In_One);
@@ -130,10 +114,9 @@ public class RobotContainer {
     btn1.whileTrue(mMoveIn3Step);
     btn2.whileTrue(mMoveIn3StepSecondPosition);
     
-<<<<<<< HEAD
+
 
     //buttonbox version
-    btn3.onTrue(mIntakeDownCMD);
     btn4.onTrue(mIntakeUpCMD);
     btn5.onTrue(mIntakeWheelCMD);
     
@@ -153,21 +136,16 @@ public class RobotContainer {
     driverXbox.povRight().onTrue(mWristGoToStraightCMD);
     driverXbox.povLeft().onTrue(mWristIntakeCMD);
     driverXbox.povUp().onTrue(mWristExitCMD);
-    driverXbox.start().onTrue(mGetCoralCMD);
+    driverXbox.povCenter().onTrue(mGetCoralCMD);
     
 
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
 
-=======
+
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
-
->>>>>>> Antoine
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-  
   }
 
   /**
@@ -177,10 +155,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-<<<<<<< HEAD
     return null;
-=======
-    return Autos.exampleAuto(m_exampleSubsystem);
->>>>>>> Antoine
   }
 }
