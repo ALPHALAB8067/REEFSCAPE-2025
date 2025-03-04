@@ -17,6 +17,7 @@ public final class Constants {
     public static final double ExtensionPouceParTour = 3.49 ;
     public static final double RotationdegresParTour = 154.285;
     public static final double RotationEncoderSafeZone = 17;
+    public static final double WristEncoderSafeZone = 0;
   }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
