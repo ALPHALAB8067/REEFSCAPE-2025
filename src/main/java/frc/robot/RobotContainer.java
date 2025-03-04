@@ -40,6 +40,16 @@ public class RobotContainer {
   final         GenericHID mGenericHID = new GenericHID(2);
   Trigger btn1 = new Trigger(()->mGenericHID.getRawButton(1));
   Trigger btn2 = new Trigger(()->mGenericHID.getRawButton(2));
+  Trigger btn3 = new Trigger(()->mGenericHID.getRawButton(3));
+  Trigger btn4 = new Trigger(()->mGenericHID.getRawButton(4));
+  Trigger btn5 = new Trigger(()->mGenericHID.getRawButton(5));
+  Trigger btn6 = new Trigger(()->mGenericHID.getRawButton(6));
+  Trigger btn17 = new Trigger(()->mGenericHID.getRawButton(17));
+  Trigger btn18 = new Trigger(()->mGenericHID.getRawButton(18));
+  Trigger btn19 = new Trigger(()->mGenericHID.getRawButton(19));
+  Trigger btn20 = new Trigger(()->mGenericHID.getRawButton(20));
+  Trigger btn21 = new Trigger(()->mGenericHID.getRawButton(21));
+  Trigger btn22 = new Trigger(()->mGenericHID.getRawButton(22));
 
   private final ARM_SS mArm_SS = new ARM_SS();
   private final PID_ExtensionCMD mPID_ExtensionCMD = new PID_ExtensionCMD(mArm_SS);
@@ -93,16 +103,31 @@ public class RobotContainer {
     btn1.whileTrue(mMoveIn3Step);
     btn2.whileTrue(mMoveIn3StepSecondPosition);
     
+
+    //buttonbox version
+    btn3.onTrue(mIntakeDownCMD);
+    btn4.onTrue(mIntakeUpCMD);
+    btn5.onTrue(mIntakeWheelCMD);
+    
+    btn17.onTrue(mWristGoToAngledCMD);
+    btn18.onTrue(mWristGoToStraightCMD);
+    btn19.onTrue(mWristIntakeCMD);
+    btn20.onTrue(mWristExitCMD);
+    btn21.onTrue(mGetCoralCMD);
+
+    
+    //joystick version
     driverXbox.leftBumper().onTrue(mIntakeDownCMD);
     driverXbox.rightBumper().onTrue(mIntakeUpCMD);
     driverXbox.leftTrigger(0.2).onTrue(mIntakeWheelCMD);
-    
+
     driverXbox.povDown().onTrue(mWristGoToAngledCMD);
     driverXbox.povRight().onTrue(mWristGoToStraightCMD);
     driverXbox.povLeft().onTrue(mWristIntakeCMD);
     driverXbox.povUp().onTrue(mWristExitCMD);
-    
     driverXbox.start().onTrue(mGetCoralCMD);
+    
+
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
