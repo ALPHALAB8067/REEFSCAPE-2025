@@ -12,6 +12,8 @@ import frc.robot.commands.MoveIn3StepSecondPosition;
 import frc.robot.commands.PID_ExtensionCMD;
 import frc.robot.commands.All_In_One_CMD;
 import frc.robot.commands.PID_RotationCMD;
+import frc.robot.commands.goToL4;
+import frc.robot.commands.goToRest;
 import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -40,6 +42,8 @@ public class RobotContainer {
   private final All_In_One_CMD mAll_In_One = new All_In_One_CMD(mArm_SS);
   private final MoveIn3Step mMoveIn3Step = new MoveIn3Step(mArm_SS);
   private final MoveIn3StepSecondPosition mMoveIn3StepSecondPosition = new MoveIn3StepSecondPosition(mArm_SS);
+  private final goToRest mgoToRest = new goToRest(mArm_SS);
+  private final goToL4 mgoToL4 = new goToL4(mArm_SS);
 
   private final PositionsDictionnary mPositionsDictionnary = new PositionsDictionnary();
   private final ButtonTest mButtonTest = new ButtonTest();
@@ -67,8 +71,8 @@ public class RobotContainer {
     driverXbox.a().whileTrue(mPID_RotationCMD);
     driverXbox.y().whileTrue(mAll_In_One);
     driverXbox.x().whileTrue(mMoveIn3Step);
-    btn1.whileTrue(mMoveIn3Step);
-    btn2.whileTrue(mMoveIn3StepSecondPosition);
+    btn1.whileTrue(mgoToL4);
+    btn2.whileTrue(mgoToRest);
     
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
