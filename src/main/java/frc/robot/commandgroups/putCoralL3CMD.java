@@ -8,21 +8,25 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.WristExitCMD;
 import frc.robot.commands.WristGoToStraightCMD;
+import frc.robot.commands.goToL3;
+import frc.robot.subsystems.ARM_SS;
 import frc.robot.subsystems.WristSS;
 
-public class putCoralCMD extends SequentialCommandGroup {
+public class putCoralL3CMD extends SequentialCommandGroup {
 
   private final WristSS wristSS;
+  private final ARM_SS armss;
 
-  public putCoralCMD(WristSS pWristSS) {
+  public putCoralL3CMD(WristSS pWristSS, ARM_SS pArm_SS) {
     
     wristSS = pWristSS;
+    armss = pArm_SS;
 
     addCommands(
 
     new ParallelCommandGroup(
-      new WristGoToStraightCMD(wristSS)
-      //arm to position
+      new WristGoToStraightCMD(wristSS),
+      new goToL3(armss)
     ),
 
     new WristExitCMD(wristSS).withTimeout(1)

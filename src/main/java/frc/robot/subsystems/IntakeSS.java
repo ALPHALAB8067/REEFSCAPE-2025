@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.AnalogInput;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticHub;
@@ -19,6 +21,8 @@ public class IntakeSS extends SubsystemBase {
   private final DoubleSolenoid rightSolenoid;
   private final DigitalInput pressureswitch;
 
+  private final Compressor compressor;
+
   private final SparkMax wheelSparkMax;
 
   public IntakeSS() {
@@ -26,12 +30,17 @@ public class IntakeSS extends SubsystemBase {
     ph = new PneumaticHub(intakeConstants.PneumaticHubPort);
     leftSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, intakeConstants.leftSolenoidFWDPort, intakeConstants.leftSolenoidRVRSPort);
     rightSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, intakeConstants.rightSolenoidFWDPort, intakeConstants.rightSolenoidRVRSPort);
+    
+    compressor = new Compressor(PneumaticsModuleType.REVPH);
+    compressor.enableAnalog(105, 120);
 
     wheelSparkMax = new SparkMax(intakeConstants.wheelSparkMaxPort, MotorType.kBrushless);
 
     pressureswitch = new DigitalInput(intakeConstants.pressureswitchport);
 
   }
+
+
 
   public void intakeUp() {
     leftSolenoid.set(Value.kForward);
@@ -59,8 +68,10 @@ public class IntakeSS extends SubsystemBase {
   public boolean getIntaked() {
     return pressureswitch.get();
   }
+  
 
   @Override
   public void periodic() {
+
   }
 }
