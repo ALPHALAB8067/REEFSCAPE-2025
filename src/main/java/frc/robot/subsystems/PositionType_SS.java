@@ -15,8 +15,9 @@ public class PositionType_SS  {
   double lenghtTolerance;
   double wristTolerance;
   double claw;
+  String name;
 
-  public PositionType_SS(double pAngle, double pWrist, double pLength , double pArmTolerance, double pWristTolerance, double pLenghtTolerance, double pClaw ) {
+  public PositionType_SS(double pAngle, double pWrist, double pLength , double pArmTolerance, double pWristTolerance, double pLenghtTolerance, double pClaw, String pName) {
     this.armAngle = pAngle;
     this.armLength = pLength;
     this.wrist = pWrist;
@@ -24,6 +25,7 @@ public class PositionType_SS  {
     this.lenghtTolerance = pLenghtTolerance;
     this.wristTolerance = pWristTolerance;
     this.claw = pClaw;
+    this.name = pName;
     
   }
 

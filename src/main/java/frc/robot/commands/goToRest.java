@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.units.measure.Current;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.PositionsDictionnary;
 import frc.robot.subsystems.ARM_SS;
@@ -53,6 +54,7 @@ public class goToRest extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("didit", true);
     mArm_SS.imHere(mTarget);
     mArm_SS.restart();
   }

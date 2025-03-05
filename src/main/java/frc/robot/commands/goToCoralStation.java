@@ -12,7 +12,7 @@ import frc.robot.subsystems.PositionType_SS;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class goToCoralStation extends Command {
   ARM_SS mArm_SS;
-  PositionType_SS mTarget = PositionsDictionnary.mPositionL3;
+  PositionType_SS mTarget = PositionsDictionnary.mPositionCoralStation;
   PositionType_SS mCurrent;
   /** Creates a new goToRest. */
   public goToCoralStation(ARM_SS pArm_SS) {
