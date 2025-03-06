@@ -82,13 +82,13 @@ public class RobotContainer {
    // driverXbox.b().whileTrue(mPID_ExtensionCMD);
     //driverXbox.a().whileTrue(mPID_RotationCMD);
     //driverXbox.y().whileTrue(mAll_In_One);
-    driverXbox.x().whileTrue(mMoveIn3Step);
-    btn1.whileTrue(mgoToRest);
-    btn2.whileTrue(mGoToL1);
-    btn3.whileTrue(mGoToL2);
-    btn4.whileTrue(mGoToL3);
-    btn5.whileTrue(mgoToL4);
-    btn6.whileTrue(mGoToCoralStation);
+    //driverXbox.x().whileTrue(mMoveIn3Step);
+    driverXbox.a().whileTrue(mgoToRest);
+    driverXbox.b().whileTrue(mGoToL1);
+    driverXbox.x().whileTrue(mGoToL2);
+    driverXbox.y().whileTrue(mGoToL3);
+    driverXbox.leftBumper().whileTrue(mgoToL4);
+    driverXbox.rightBumper().whileTrue(mGoToCoralStation);
 
     
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`

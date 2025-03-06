@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.PositionsDictionnary;
@@ -14,7 +13,7 @@ import frc.robot.subsystems.PositionType_SS;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class goToRest extends Command {
   ARM_SS mArm_SS;
-  PositionType_SS mTarget = PositionsDictionnary.mPositionRest;
+  private PositionType_SS mTarget = PositionsDictionnary.mPositionRest;
   PositionType_SS mCurrent;
   /** Creates a new goToRest. */
   public goToRest(ARM_SS pArm_SS) {
@@ -56,7 +55,7 @@ public class goToRest extends Command {
   public void end(boolean interrupted) {
     SmartDashboard.putBoolean("didit", true);
     mArm_SS.imHere(mTarget);
-    mArm_SS.restart();
+    mArm_SS.done = false;
   }
 
   // Returns true when the command should end.
